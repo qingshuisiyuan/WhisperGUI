@@ -11,10 +11,3 @@ Build cuda_12.8.r12.8/compiler.35583870_0
 
 如果你选择导出为TXT格式，你将会得到一段没有任何标点符号的连续文本，这个问题暂时无法解决。 
 
-
-# WhisperGUI-V1.4
-python实现的Whisper视频、语音文件识别字幕并生成
-![image](https://github.com/user-attachments/assets/9c25a027-8af7-44c3-936f-fc84743b7e58)
-#使用说明
-在不导入本地模型的情况下，可以直接选择官方的在线模型，程序会自动下载并加载。  
-没有CUDA则使用CPU运算。
