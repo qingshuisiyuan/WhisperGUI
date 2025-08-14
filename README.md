@@ -6,7 +6,6 @@ python实现的Whisper的GUI，支持视频、语音文件识别字幕并生成
 支持GPU运算和纯CPU运算，如果你安装了CUDA12.8版本，则自动启用GPU运算，如没有安装，则使用CPU模式。 
 您需要额外安装的CUDA版本：Cuda compilation tools, release 12.8, V12.8.93 
 Build cuda_12.8.r12.8/compiler.35583870_0 
-因为压缩包内置torch版本cu128，所以你的CUDA版本理论上也需要是12.8，才可能运行稳定。 
 
 如果您需要离线模型，可先让程序自行下载官方模型。 
 
