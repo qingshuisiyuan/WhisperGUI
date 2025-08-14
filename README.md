@@ -1,4 +1,4 @@
-# WhisperGUI-V1.3
+# WhisperGUI-V1.4
 python实现的Whisper的GUI，支持视频、语音文件识别字幕并生成 
 ![image](https://github.com/user-attachments/assets/f7b13ac6-ddcc-4531-8279-1459fd1451f4) 
 ## 使用说明
