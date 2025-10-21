@@ -1,14 +1,13 @@
 # WhisperGUI
 python实现的Whisper的GUI，支持视频、语音文件识别字幕并生成
 ![image](https://github.com/user-attachments/assets/f7b13ac6-ddcc-4531-8279-1459fd1451f4) 
-下面是为该项目 WhisperGUI（repo: qingshuisiyuan/WhisperGUI）撰写的 README 文档范本。你可根据实际需要在 GitHub 仓库中保存为 `README.md` 并做适当调整。
 
 ---
 
 # WhisperGUI
 
 > 视频／音频文件识别字幕生成工具（基于 whisper 或 faster‑whisper）
-> 开发者：@qingshuisiyuan
+> 开发者：@qingshuisiyuan（实际上是chatgpt）
 
 ---
 
@@ -30,7 +29,7 @@ python实现的Whisper的GUI，支持视频、语音文件识别字幕并生成
 
 ## 支持的文件格式
 
-包含但不限于：
+包含但不限于（你可以在代码中自己添加）：
 `.m4a`, `.mp3`, `.mp4`, `.wav`, `.avi`, `.vob`, `.mov`, `.mkv`,
 `.aac`, `.flac`, `.ogg`, `.webm`, `.flv`, `.rmvb`, `.wmv`
 
@@ -41,9 +40,10 @@ python实现的Whisper的GUI，支持视频、语音文件识别字幕并生成
 ### 安装依赖
 
 ```bash
-pip install -U openai-whisper torch pydub
+pip install -U openai-whisper
 # 若使用 faster-whisper 模式，则：
 # pip install faster-whisper
+pip install --pre torch --index-url https://download.pytorch.org/whl/nightly/cu128
 ```
 
 另外请确保系统中已安装 **FFmpeg/ffprobe**：
@@ -70,7 +70,7 @@ pip install -U openai-whisper torch pydub
 4. 在 GUI 中：
 
    * 点击「选择文件」或「选择文件夹」导入音视频。
-   * 在「语言选项」选择 Auto 或手动语言。
+   * 在「语言选项」选择 Auto 或手动语言，如果源文件是多语言建议Auto。
    * 在「选择模型」选择模型（如 base、small、large-v3）或指定模型文件夹。
    * 在「导出格式」选择 SRT 或 TXT。
    * 选择「保存位置」方式：跟随源路径 / 统一输出。
@@ -81,7 +81,7 @@ pip install -U openai-whisper torch pydub
 
 ## 示例截图
 
-> （建议添加项目中的实际界面截图，方便用户直观了解）
+![image](https://github.com/user-attachments/assets/f7b13ac6-ddcc-4531-8279-1459fd1451f4) 
 
 ---
 
@@ -89,7 +89,8 @@ pip install -U openai-whisper torch pydub
 
 ### 模型文件夹离线使用
 
-如果你已事先下载 `.pt` 模型文件（例如 `large-v3.pt`），可点击「模型文件夹」选择所在目录，然后下拉列表会自动显示该文件名称。选择后程序加载该离线模型，无需重新下载。
+OpenAI：如果你已事先下载 `.pt` 模型文件（例如 `large-v3.pt`），可点击「模型文件夹」选择所在目录，然后下拉列表会自动显示该文件名称。选择后程序加载该离线模型，无需重新下载。
+faster：离线模型必须是从huggingface下载的完整包，如果你选择在线模型，程序会自动下载。
 
 ### 识别设置说明 (openai-whisper 模式)
 
@@ -131,13 +132,13 @@ result = model.transcribe(
 ## 常见问题 (FAQ)
 
 **Q：识别结果只有一句话反复出现？**
-A：请确保 `condition_on_previous_text=False` 已启用。若仍有问题，尝试切换模型至 small/medium 并确认音频质量。
+A：请确保 `condition_on_previous_text=False` 已启用。若仍有问题，尝试切换质量更高的模型并确认音频质量。
 
 **Q：没有 GPU 也可以用吗？**
 A：可。程序会自动检测 CUDA 可用性。若无 GPU，则退为 CPU 模式，仅速度较慢。
 
 **Q：TXT 输出的文本为何没有标点？**
-A：这是 whisper 模型当前版本的限制：TXT 模式输出为连续识别文本，不保证标点完整。建议使用 SRT 获取最佳时间轴 + 字幕体验。
+A：没有完善这个功能。建议使用 SRT 获取最佳时间轴 + 字幕体验。
 
 **Q：导出的 SRT 无法与视频同步？**
 A：请确保音频文件为原始整段、未剪切且采样率标准。如有偏差，可使用 ffmpeg 预处理音频确保时长与原视频一致。
@@ -147,7 +148,7 @@ A：请确保音频文件为原始整段、未剪切且采样率标准。如有�
 ## 许可证 & 致谢
 
 此项目遵循 MIT 许可证。
-感谢 OpenAI Whisper 模型及社区贡献者。
+感谢 OpenAI。
 如果你喜欢此项目，欢迎 ⭐ Star 并转发给需要字幕处理的朋友！
 
 ---
@@ -161,7 +162,3 @@ A：请确保音频文件为原始整段、未剪切且采样率标准。如有�
 2. 创建 feature 分支 (`git checkout -b feature-xxx`)。
 3. 提交代码与测试。
 4. 提交 PR 并描述改动。
-
----
-
-希望这个 README.md 能帮助用户快速上手，并对项目功能、使用方式、注意事项有清晰了解。你如果需要我进一步撰写项目示例截图、视频演示链接、或详细代码注释说明，我也可以帮你。
